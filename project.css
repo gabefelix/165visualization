@@ -1,17 +1,3 @@
-/*body {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.browser text {
-  text-anchor: end;
-}*/
  body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: auto;
@@ -47,7 +33,7 @@ input {
 
 path { 
     stroke: steelblue;
-    stroke-width: 0;
+    stroke-width: .5;
     fill: none;
 }
 
@@ -58,17 +44,7 @@ path {
     stroke-width: 1;
     shape-rendering: crispEdges;
 }
+
 .arc path {
   stroke: #fff;
 }
-.place,
-        .place-label {
-            fill: #444;
-        }
-
-
-/*.line {
-    fill: none;
-    stroke: url(#line-gradient);
-    stroke-width: 2px;
-}*/

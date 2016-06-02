@@ -93,7 +93,7 @@ d3.csv("dept.csv", function(error, data) {
 
 
 
-var margin = {top: 20, right: 120, bottom: 30, left: 50},
+(function() {var margin = {top: 20, right: 120, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -140,6 +140,11 @@ var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
+var zoom = d3.behavior.zoom()
+    .x(x)
+    .y(y)
+    .scaleExtent([1, 10])
+    .on("zoom", zoomed);
 
 d3.csv("depttwo.csv", function(error, data) {
   color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
@@ -184,11 +189,17 @@ d3.csv("depttwo.csv", function(error, data) {
           tooltip.transition()
                .duration(500)
                .style("opacity", 0);
-        });
+        })
+      .attr("transform", transform);
+
+  
 
   browser.append("path")
       .attr("class", "area")
       .attr("d", function(d) { return area(d.values); })
+    
+    .attr("transform", transform)
+    //This was supposed to load new data
       .on("click", function(){
          var newpath = browser.append("path")
                         .attr("class", "line")
@@ -215,12 +226,46 @@ d3.csv("depttwo.csv", function(error, data) {
       .attr("class", "y axis")
       .call(yAxis);
     
-           arrangeLabels();
+          // arrangeLabels();
 
 });
 
 
-function arrangeLabels() {
+
+
+function zoomed() {
+//container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+            //svg.select("g.candlestick").call(candlestick);
+
+  svg.select(".x.axis").call(xAxis);
+  svg.select(".y.axis").call(yAxis);
+ // svg.select("path.area").attr("d", xValue);
+//  svg.select("path.line").attr("d", yValue);  
+  //svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    
+   /*points.selectAll('circle').attr("transform", function(d) { 
+		return "translate(" + xScale(d.point.x) + "," + yScale(d.point.y) + ")"; }
+	);  */
+    
+     svg.selectAll(".browser")
+        .attr("transform", transform);
+     svg.selectAll(".browser.path")
+        .attr("transform", transform);
+     svg.selectAll(".text")
+        .attr("transform", transform);
+}
+
+function transform(d) {
+    return "translate(" + x(d.date) + "," + y(d.values) + ")";
+  }
+
+            
+
+})();
+
+
+
+/*function arrangeLabels() {
   var move = 1;
   while(move > 0) {
     move = 0;
@@ -255,3 +300,4 @@ function arrangeLabels() {
   }
 }
 
+*/
