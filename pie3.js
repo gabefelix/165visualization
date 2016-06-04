@@ -1,4 +1,4 @@
-var width = 460,
+(function() {var width = 460,
     height = 500,
     // find the min of width and height and devided by 2
     radius = Math.min(width, height) / 2;
@@ -14,7 +14,7 @@ var arc = d3.svg.arc()
 // Constructs a new pie function
 var pie = d3.layout.pie()
     .sort(null)
-    .value(function(d) { return d.smallx; });
+    .value(function(d) { return d.smallf; });
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -27,7 +27,7 @@ d3.csv("pie2.csv", function(error, data) {
   // convert all population to integer
   data.forEach(function(d) {
     //d.late = +d.late;
-    d.smallx= +d.smallx;
+    d.smallf= +d.smallf;
   });
 
   // append a group
@@ -54,61 +54,4 @@ d3.csv("pie2.csv", function(error, data) {
 });
 
 
-
-
-
-/*var width = 960,
-    height = 500,
-    radius = Math.min(width, height) / 2;
-
-var color = d3.scale.category20();
-
-var pie = d3.layout.pie()
-    .value(function(d) { return d.count; })
-    .sort(null);
-
-var arc = d3.svg.arc()
-    .innerRadius(radius - 100)
-    .outerRadius(radius - 20);
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-  .append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-var path = svg.selectAll("path");
-
-d3.tsv("piesshort.tsv", type, function(error, data) {
-  var regionsByFruit = d3.nest()
-      .key(function(d) { return d.fruit; })
-      .entries(data);
-
-  var label = d3.select("form").selectAll("label")
-      .data(regionsByFruit)
-    .enter().append("label");
-
-  label.append("input")
-      .attr("type", "radio")
-      .attr("name", "fruit")
-      .attr("value", function(d) { return d.key; })
-      .on("change", change)
-    .filter(function(d, i) { return !i; })
-      .each(change)
-      .property("checked", true);
-
-  label.append("span")
-      .text(function(d) { return d.key; });
-
-  function change(region) {
-    path = path.data(pie(region.values), function(d) { return d.data.region; });
-    path.enter().append("path").attr("fill", function(d) { return color(d.data.region); });
-    path.exit().remove();
-    path.attr("d", arc);
-  }
-});
-
-function type(d) {
-  d.count = +d.count;
-  return d;
-}*/
+})();
