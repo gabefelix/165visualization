@@ -1,4 +1,5 @@
-var x = (function() {
+var updateData; 
+(function x() {
 var margin = {top: 20, right: 120, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -94,7 +95,7 @@ d3.csv("depttwocopy.csv", function(error, data) {
      party:["regan","regan","regan","regan","G.H.W. Bush","G.H.W. Bush","G.H.W. Bush","G.H.W. Bush", "Clinton","Clinton","Clinton","Clinton","Clinton","Clinton","Clinton","Clinton","G.W. Bush","G.W. Bush","G.W. Bush","G.W. Bush","G.W. Bush","G.W. Bush","G.W. Bush","G.W. Bush","Obama","Obama","Obama","Obama","Obama","Obama","Obama",]
 }
   
-  var unused=["Legislative Branch","Judicial Branch", "Department of Agriculture", "Department of Commerce", "Department of Veterans Affairs","Department of Education","Department of Energy",""]
+  var unused=["Legislative Branch","Judicial Branch", "Department of Agriculture", "Department of Commerce", "Department of Veterans Affairs","Department of Education","Department of Energy"]
 
    browser = svg.selectAll(".browser")
       .data(browsers)
@@ -136,7 +137,14 @@ d3.csv("depttwocopy.csv", function(error, data) {
       .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y / 2) + ")"; })
       .attr("x", 10)
-      .text(function(d) { return d.name; });
+      .text(function(d) {/* 
+      if(unused.indexOf(return d.name)==-1){
+          return " "
+      }
+      else{     */   
+        return d.name; 
+      //}
+  });
 
  //x-axis
     svg.append("g")
@@ -167,9 +175,17 @@ d3.csv("depttwocopy.csv", function(error, data) {
         .text("Department's Share of Overall US Budget");
 });
 
+    /*function returnNames(function(d)){
+        if d.name.length==1{
+            return " ";
+        }
+        else{
+            return d.name;
+        }
+    }*/
 
     
-    function updateData() {
+    updateData = function () {
         console.log("updated_called");
             //    browser.exit().remove();
 
@@ -189,8 +205,10 @@ d3.csv("depttwocopy.csv", function(error, data) {
                         };
                     }));
 
+            //had to change this function around so that 
+            //it would only find highest value and not sum them up. 
             var vals =0;
-  // Find the value of the day with highest total value
+            // Find the value of the branch with highest total value
             var maxDateVal = d3.max(data, function(d){
                 vals = d3.keys(d).map(function(key){ return key !== "date" ? d[key] : 0 });
             //var yt = d3.sum(vals);
@@ -221,6 +239,7 @@ d3.csv("depttwocopy.csv", function(error, data) {
             
     });   
 }
+    //return(updateData());
 
         //Zoom function 
        function zoomed() {
@@ -234,7 +253,7 @@ d3.csv("depttwocopy.csv", function(error, data) {
 
 })();
 
-
+x();
 
 
 /*
