@@ -62,9 +62,10 @@ var tooltip = d3.select("body").append("div")
 d3.csv("depttwocopy.csv", function(error, data) {
     
     
-  color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
+  color.domain(d3.keys(data[0]).filter(function(key) { return (key !== "date"&& key !== "pres"); }));
   data.forEach(function(d) {
   	d.date = parseDate(d.date);
+    d.pres = d.pres
   });
     
     
@@ -106,7 +107,7 @@ d3.csv("depttwocopy.csv", function(error, data) {
                .duration(200)
                .style("opacity", .9);
         }).on("mousemove", function(d) {
-          tooltip .html(d["name"] + "<br>" + "1985: " + d["values"][0].y + "%" + "<br>" + "2000: " + d["values"][14].y + "%" + "<br>" + "1985: " + d["values"][29].y + "%" )
+          tooltip .html(d["name"] + "<br>" + "1985: " + d["values"][0].y + "%" + "<br>" + "2000: " + d["values"][14].y + "%" + "<br>" + "2015: " + d["values"][29].y + "<br>"+d["pres"]+ "%" )
                .style("left", ((d3.mouse(this))[0]) + "px")
                .style("top", ((d3.mouse(this))[1]) + "px");
         })
@@ -187,58 +188,57 @@ d3.csv("depttwocopy.csv", function(error, data) {
     
     updateData = function () {
         console.log("updated_called");
-            //    browser.exit().remove();
-
+           
+        //this.browser.exit().remove();
     // Get the data again
-        d3.csv("deptsmall.csv", function(error, data) {
-            
-            color.domain(d3.keys(data[0]).filter(function(key) { return     key !== "date"; }));
-                data.forEach(function(d) {
-                    d.date = parseDate(d.date);
-                    });
-
-            var browsers = stack(color.domain().map(function(name) {
-            return {
-                name: name,
-                    values: data.map(function(d) {
-                        return {date: d.date, y: d[name] * 1};})
-                        };
-                    }));
-
-            //had to change this function around so that 
-            //it would only find highest value and not sum them up. 
-            var vals =0;
-            // Find the value of the branch with highest total value
-            var maxDateVal = d3.max(data, function(d){
-                vals = d3.keys(d).map(function(key){ return key !== "date" ? d[key] : 0 });
-            //var yt = d3.sum(vals);
-            return d3.sum(vals);
+    d3.csv("deptsmall.csv", function(error, data) {
+        color.domain(d3.keys(data[0]).filter(function(key) { return     key !== "date"; }));
+            data.forEach(function(d) {
+                d.date = parseDate(d.date);
                 });
 
-  // Set domains for axes
-            x.domain(d3.extent(data, function(d) { return d.date; }));
-            y.domain([0, d3.sum(vals)])
-     
-           // var svg = d3.select("body").transition();
-            browser.data(browsers).select("path").transition().duration(550).attr("d", function(d) { return area(d.values); });
-            
-    // Make the changes
-        /*browser.select(".browser") 
-            .transition()  // change the line
-            .duration(750)
-            .attr("d", function(d) { return area(d.values); })*/
-            //.attr("d", stack(data))
-        ;
+        var browsers = stack(color.domain().map(function(name) {
+        return {
+            name: name,
+                values: data.map(function(d) {
+                    return {date: d.date, y: d[name] * 1};})
+                    };
+                }));
+
+        //had to change this function around so that 
+        //it would only find highest value and not sum them up. 
+        var vals =0;
+        // Find the value of the branch with highest total value
+        var maxDateVal = d3.max(data, function(d){
+            vals = d3.keys(d).map(function(key){ return key !== "date" ? d[key] : 0 });
+        //var yt = d3.sum(vals);
+        return d3.sum(vals);
+            });
+
+// Set domains for axes
+        x.domain(d3.extent(data, function(d) { return d.date; }));
+        y.domain([0, d3.sum(vals)])
+
+       // var svg = d3.select("body").transition();
+        browser.data(browsers).select("path").transition().duration(550).attr("d", function(d) { return area(d.values); });
+
+        //this line is supposed to remove the previous chart data
+        browser.exit()
+        .attr("class", "exit")
+        .transition()
+        .duration(750)
+        //.attr("y", 60)
+        //.style("fill-opacity", 1e-6)
+        .remove();
        
         svg.select(".y.axis") // change the y axis
            // .duration(750)
-            .call(yAxis);
-            
-    
-            
+            .call(yAxis);    
             
     });   
 }
+    
+    
     //return(updateData());
 
         //Zoom function 
@@ -253,7 +253,7 @@ d3.csv("depttwocopy.csv", function(error, data) {
 
 })();
 
-x();
+//x();
 
 
 /*
