@@ -135,11 +135,13 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
+//define toolzip
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
+             
+//define zoom
 var zoom = d3.behavior.zoom()
     .x(x)
     .y(y)
@@ -173,6 +175,8 @@ d3.csv("depttwo.csv", function(error, data) {
   x.domain(d3.extent(data, function(d) { return d.date; }));
   y.domain([0, d3.sum(vals)])
 
+  
+  //set up the svg for tooltip and zoom
   var browser = svg.selectAll(".browser")
       .data(browsers)
     .enter().append("g")
@@ -193,7 +197,8 @@ d3.csv("depttwo.csv", function(error, data) {
       .attr("transform", transform);
 
   
-
+    
+    //main lines get drawn here here
   browser.append("path")
       .attr("class", "area")
       .attr("d", function(d) { return area(d.values); })
@@ -210,6 +215,7 @@ d3.csv("depttwo.csv", function(error, data) {
       .style("fill", function(d) { return color(d.name); });
       
 
+    //text gets appended here
   browser.append("text")
       .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y / 2) + ")"; })
@@ -255,11 +261,11 @@ function zoomed() {
         .attr("transform", transform);
 }
 
+             
 function transform(d) {
     return "translate(" + x(d.date) + "," + y(d.values) + ")";
   }
 
-            
 
 })();
 
