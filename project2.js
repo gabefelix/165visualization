@@ -216,7 +216,7 @@ d3.csv("depttworedo.csv", function(error, data) {
 
        // var svg = d3.select("body").transition();
         
-        browser.exit().transition.remove();
+       // browser.exit().transition.remove();
         browser.data(browsers).select("path").transition().duration(550).attr("d", function(d) { return area(d.values); });
 
         //this line is supposed to remove the previous chart data
