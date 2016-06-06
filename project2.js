@@ -59,11 +59,12 @@ var tooltip = d3.select("body").append("div")
 
 
     var browser ;
-d3.csv("depttworedo.csv", function(error, data) {
+d3.csv("depttwocopy.csv", function(error, data) {
     
     
   color.domain(d3.keys(data[0]).filter(function(key) { return (key !== "date"&& key !== "pres"); }));
-  data.forEach(function(d) {
+  
+data.forEach(function(d) {
   	d.date = parseDate(d.date);
     d.pres = d.pres
   });
@@ -134,7 +135,18 @@ d3.csv("depttworedo.csv", function(error, data) {
       
 
     //append text to the graph
-  browser.append("text")
+/*  browser.append("text")
+      .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
+      .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y / 2) + ")"; })
+      .attr("x", 10)
+      .text(function(d) { return d.name; 
+      //}
+  });*/
+    
+    browser.filter(function(d){return(d.name != "Legislative Branch" && d.name !="Judicial Branch" && d.name != "Agriculture" && d.name != " Commerce" && d.name!="Energy" && d.name !="Homeland Security"&&
+        d.name != "Housing and Urban Development" && d.name!="Interior"
+        && d.name!="Justice"&& d.name!="Labor"&& d.name!="State"&& d.name!="Transportation"&& d.name!="Corps of Engineers--Civil Works"&& d.name!="Other Defense Civil Programs"&& d.name!="Executive Office of the President"  && d.name!="General Services Administration" && d.name!="International Assistance Programs" && d.name!="Office of Personnel Management" && d.name!="Small Business Administration" && d.name!="q")})
+        .append("text")
       .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y / 2) + ")"; })
       .attr("x", 10)
@@ -228,7 +240,7 @@ d3.csv("depttworedo.csv", function(error, data) {
         //.style("fill-opacity", 1e-6)
         .remove();
         */
-        var k = 
+       // var k = 
        
         svg.select(".y.axis") // change the y axis
            // .duration(750)
