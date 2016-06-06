@@ -1,7 +1,7 @@
 var updateData; 
 (function x() {
-var margin = {top: 20, right: 120, bottom: 30, left: 50},
-    width = 960 - margin.left - margin.right,
+var margin = {top: 20, right: 180, bottom: 30, left: 50},
+    width = 1080 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 var margin2 = {top: 20, right: 120, bottom: 30, left: 50},
@@ -59,7 +59,7 @@ var tooltip = d3.select("body").append("div")
 
 
     var browser ;
-d3.csv("depttwocopy.csv", function(error, data) {
+d3.csv("depttworedo.csv", function(error, data) {
     
     
   color.domain(d3.keys(data[0]).filter(function(key) { return (key !== "date"&& key !== "pres"); }));
@@ -138,12 +138,7 @@ d3.csv("depttwocopy.csv", function(error, data) {
       .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y / 2) + ")"; })
       .attr("x", 10)
-      .text(function(d) {/* 
-      if(unused.indexOf(return d.name)==-1){
-          return " "
-      }
-      else{     */   
-        return d.name; 
+      .text(function(d) { return d.name; 
       //}
   });
 
@@ -220,22 +215,26 @@ d3.csv("depttwocopy.csv", function(error, data) {
         y.domain([0, d3.sum(vals)])
 
        // var svg = d3.select("body").transition();
+        
+        browser.exit().transition.remove();
         browser.data(browsers).select("path").transition().duration(550).attr("d", function(d) { return area(d.values); });
 
         //this line is supposed to remove the previous chart data
-        browser.exit()
+        /*browser.exit()
         .attr("class", "exit")
         .transition()
         .duration(750)
         //.attr("y", 60)
         //.style("fill-opacity", 1e-6)
         .remove();
+        */
+        var k = 
        
         svg.select(".y.axis") // change the y axis
            // .duration(750)
             .call(yAxis);    
             
-    });   
+    }); 
 }
     
     
