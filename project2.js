@@ -91,7 +91,7 @@ data.forEach(function(d) {
   // Set domains for axes
   x.domain(d3.extent(data, function(d) { return d.date; }));
   y.domain([0, d3.sum(vals)])
- ""
+ 
   var presidents = {
     years:[1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015],
      party:["regan","regan","regan","regan","G.H.W. Bush","G.H.W. Bush","G.H.W. Bush","G.H.W. Bush", "Clinton","Clinton","Clinton","Clinton","Clinton","Clinton","Clinton","Clinton","G.W. Bush","G.W. Bush","G.W. Bush","G.W. Bush","G.W. Bush","G.W. Bush","G.W. Bush","G.W. Bush","Obama","Obama","Obama","Obama","Obama","Obama","Obama",]
@@ -108,7 +108,7 @@ data.forEach(function(d) {
                .duration(200)
                .style("opacity", .9);
         }).on("mousemove", function(d) {
-          tooltip .html(d["name"] + "<br>" + "1985: " + d["values"][0].y + "%" + "<br>" + "2000: " + d["values"][14].y + "%" + "<br>" + "2015: " + d["values"][29].y + "<br>"+d["pres"]+ "%" )
+          tooltip .html(d["name"] + "<br> <div style=\"display: inline-block; text-align: left;\">" + "1985: " + d["values"][0].y + "%" + "<br>" + "2000: " + d["values"][14].y + "%" + "<br>" + "2015: " + d["values"][29].y + "%" + "</div>")
                .style("left", ((d3.mouse(this))[0]) + "px")
                .style("top", ((d3.mouse(this))[1]) + "px");
         })
@@ -117,7 +117,6 @@ data.forEach(function(d) {
                .duration(500)
                .style("opacity", 0);
         });
-    
    // var =["a", "b", "c","d","e","f","g","h", "i", "j","k"]
 
 
