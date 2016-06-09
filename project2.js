@@ -22,7 +22,8 @@ var y = d3.scale.linear()
     .range([height, 0]);
 
 
-var color = d3.scale.category20();
+var color = d3.scale.ordinal()
+    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","#d0743c", "#ff8c00"]); 
 
 var xAxis = d3.svg.axis().scale(x).orient("bottom").tickPadding(2);
     var yAxis = d3.svg.axis().scale(y).orient("left").tickPadding(2);
@@ -49,8 +50,7 @@ var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-     .call(zoom); 
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); 
 
 
 var tooltip = d3.select("body").append("div")
@@ -133,15 +133,7 @@ data.forEach(function(d) {
       .style("fill", function(d) { return color(d.name); });
       
 
-    //append text to the graph
-/*  browser.append("text")
-      .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
-      .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y / 2) + ")"; })
-      .attr("x", 10)
-      .text(function(d) { return d.name; 
-      //}
-  });*/
-    
+
     browser.filter(function(d){return(d.name != "Legislative Branch" && d.name !="Judicial Branch" && d.name != "Agriculture" && d.name != " Commerce" && d.name!="Energy" && d.name !="Homeland Security"&&
         d.name != "Housing and Urban Development" && d.name!="Interior"
         && d.name!="Justice"&& d.name!="Labor"&& d.name!="State"&& d.name!="Transportation"&& d.name!="Corps of Engineers--Civil Works"&& d.name!="Other Defense Civil Programs"&& d.name!="Executive Office of the President"  && d.name!="General Services Administration" && d.name!="International Assistance Programs" && d.name!="Office of Personnel Management" && d.name!="Small Business Administration" && d.name!="q")})
@@ -152,6 +144,98 @@ data.forEach(function(d) {
       .text(function(d) { return d.name; 
       //}
   });
+    
+    
+      
+    var myLine = browser.append("svg:line")
+    .attr("x1", 2)
+    .attr("y1", 0)
+    .attr("x2", 2)
+    .attr("y2", 450)
+    .style("stroke", "rgb(240,40,0)");
+    
+     var myLine = browser.append("svg:line")
+    .attr("x1", 100)
+    .attr("y1", 0)
+    .attr("x2", 100)
+    .attr("y2", 450)
+    .style("stroke", "rgb(240,40,0)");
+    
+     var myLine = browser.append("svg:line")
+    .attr("x1", 197)
+    .attr("y1", 0)
+    .attr("x2", 197)
+    .attr("y2", 450)
+    .style("stroke", "rgb(240,40,0)");
+
+    var myLine = browser.append("svg:line")
+    .attr("x1", 200)
+    .attr("y1", 0)
+    .attr("x2", 200)
+    .attr("y2", 450)
+    .style("stroke", "rgb(0,40,240)");
+    
+    var myLine = browser.append("svg:line")
+    .attr("x1", 320)
+    .attr("y1", 0)
+    .attr("x2", 320)
+    .attr("y2", 450)
+    .style("stroke", "rgb(0,40,240)");
+    
+    var myLine = browser.append("svg:line")
+    .attr("x1", 450)
+    .attr("y1", 0)
+    .attr("x2", 450)
+    .attr("y2", 450)
+    .style("stroke", "rgb(0,40,240)");
+    
+    var myLine = browser.append("svg:line")
+    .attr("x1", 453)
+    .attr("y1", 0)
+    .attr("x2", 453)
+    .attr("y2", 450)
+    .style("stroke", "rgb(240,40,0)");
+
+    var myLine = browser.append("svg:line")
+    .attr("x1", 553)
+    .attr("y1", 0)
+    .attr("x2", 553)
+    .attr("y2", 450)
+    .style("stroke", "rgb(240,40,0)");
+
+    var myLine = browser.append("svg:line")
+    .attr("x1", 653)
+    .attr("y1", 0)
+    .attr("x2", 653)
+    .attr("y2", 450)
+    .style("stroke", "rgb(240,40,0)");
+
+
+    
+    var myLine = browser.append("svg:line")
+    .attr("x1", 656)
+    .attr("y1", 0)
+    .attr("x2", 656)
+    .attr("y2", 450)
+    .style("stroke", "rgb(0,40,240)");
+    
+     var myLine = browser.append("svg:line")
+    .attr("x1", 755)
+    .attr("y1", 0)
+    .attr("x2", 755)
+    .attr("y2", 450)
+    .style("stroke", "rgb(0,40,240)");
+
+    var myLine = browser.append("svg:line")
+    .attr("x1", 848)
+    .attr("y1", 0)
+    .attr("x2", 848)
+    .attr("y2", 450)
+    .style("stroke", "rgb(0,40,240)");
+
+  
+    
+    
 
  //x-axis
     svg.append("g")
