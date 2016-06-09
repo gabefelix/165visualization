@@ -1,5 +1,5 @@
-(function() {var width = 460,
-    height = 500,
+(function() {var width = 360,
+    height = 400,
     // find the min of width and height and devided by 2
     radius = Math.min(width, height) / 2;
 

@@ -1,5 +1,5 @@
-(function() {var width = 460,
-    height = 500,
+(function() {var width = 360,
+    height = 400,
     // find the min of width and height and devided by 2
     radius = Math.min(width, height) / 2;
 
@@ -42,11 +42,12 @@ d3.csv("pie2.csv", function(error, data) {
       .style("fill", function(d) { return color(d.data.branch2); });
 
   // add text
-  g.append("text")
+   g.append("text")
       .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
       .attr("dy", ".35em")
       .style("text-anchor", "middle")
       .text(function(d) { return d.data.branch2; });
+    
     
     // d3.selectAll("input")
       //.on("change", change);
