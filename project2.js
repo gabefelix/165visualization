@@ -134,9 +134,9 @@ data.forEach(function(d) {
       
 
 
-    browser.filter(function(d){return(d.name != "Legislative Branch" && d.name !="Judicial Branch" && d.name != "Agriculture" && d.name != " Commerce" && d.name!="Energy" && d.name !="Homeland Security"&&
+    browser.filter(function(d){return(d.name != "Legislative" && d.name !="Judicial" && d.name != "Agriculture" && d.name != " Commerce" && d.name!="Energy" && d.name !="Homeland Security"&&
         d.name != "Housing and Urban Development" && d.name!="Interior"
-        && d.name!="Justice"&& d.name!="Labor"&& d.name!="State"&& d.name!="Transportation"&& d.name!="Corps of Engineers--Civil Works"&& d.name!="Other Defense Civil Programs"&& d.name!="Executive Office of the President"  && d.name!="General Services Administration" && d.name!="International Assistance Programs" && d.name!="Office of Personnel Management" && d.name!="Small Business Administration" && d.name!="q")})
+        && d.name!="Justice"&& d.name!="Labor"&& d.name!="State"&& d.name!="Transportation"&& d.name!="Corps of Engineers--Civil Works"&& d.name!="Other Defense Civil Programs"&& d.name!="Executive Office of the President"  && d.name!="General Services Administration" && d.name!="International Assistance Programs" && d.name!="Office of Personnel Management" && d.name!="Small Business Administration" && d.name!="National Science Foundation")})
         .append("text")
       .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; })
       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y / 2) + ")"; })
