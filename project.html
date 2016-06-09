@@ -14,7 +14,13 @@
     </form>
     <body>
         <h1 style = "text-align:center; color:steelblue"><bold> Historical US Budget Allocation </bold></h1>
-        <center><big>Our visualization is a stacked area chart displaying changes in the United States budget allocation between 1985 and 2015. The graph is broken down by department and each of the Presidents’ terms are indicated. The pie charts below the main graph show the immediate difference in budget allocation between 1985 and 2015. </big></center>
+        <center><big> 
+            Looking at the allocation of the federal budget by department, it is noticable that some departments have outgrown others, while others show growth that may never stop. If healthcare and social security programs continue to grow, their share of the US budget may spell disaster in the future. 
+            </big></center>
+        
+        <br><center>
+        Red lines and the area in-between = republican president 
+        <br>Blue lines and the area in-between = democratic president </center>
         <!-- Your D3.js code for making a Bar Graph -->
         <!--<div id="option">
             <input name="updateButton" 
@@ -28,8 +34,15 @@
         <center><div id="option">
                 <input name="updateButton" 
                         type="button" 
-                        value="Breakdown" 
+                        value="Top 5 Depts." 
                         onclick="updateData()" />
+                </div>
+            
+            <center><div id="option">
+                <input name="updateButton2" 
+                        type="button" 
+                        value="All Depts" 
+                        onclick="reloadData()" />
                 </div>
         </center>
         <br>

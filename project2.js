@@ -333,7 +333,73 @@ data.forEach(function(d) {
 }
     
     
-    //return(updateData());
+    reloadData = function () {
+        console.log("updated_called");
+           
+        //this.browser.exit().remove();
+    // Get the data again
+    d3.csv("depttwocopy.csv", function(error, data) {
+         color.domain(d3.keys(data[0]).filter(function(key) { return (key !== "date"&& key !== "pres"); }));
+  
+        data.forEach(function(d) {
+  	     d.date = parseDate(d.date);
+            d.pres = d.pres
+        });
+    
+    
+
+        var browsers = stack(color.domain().map(function(name) {
+            return {
+                name: name,
+                values: data.map(function(d) {
+        return {date: d.date, y: d[name] * 1};
+        })
+            };
+        }));
+
+    var vals =0;
+  // Find the value of the day with highest total value
+  var maxDateVal = d3.max(data, function(d){
+      vals = d3.keys(d).map(function(key){ return key !== "date" ? d[key] : 0 });
+    //var yt = d3.sum(vals);, 
+    return d3.sum(vals);
+  });
+
+  // Set domains for axes
+  x.domain(d3.extent(data, function(d) { return d.date; }));
+  y.domain([0, d3.sum(vals)])
+
+       // var svg = d3.select("body").transition();
+        
+       // browser.exit().transition.remove();
+        browser.data(browsers).select("path").transition().duration(550).attr("d", function(d) { return area(d.values); });
+
+        //this line is supposed to remove the previous chart data
+        /*browser.exit()
+        .attr("class", "exit")
+        .transition()
+        .duration(750)
+        //.attr("y", 60)
+        //.style("fill-opacity", 1e-6)
+        .remove();
+        */
+       // var k = 
+       
+        svg.select(".y.axis") // change the y axis
+           // .duration(750)
+            .call(yAxis);    
+            
+    }); 
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
         //Zoom function 
        function zoomed() {
@@ -347,42 +413,5 @@ data.forEach(function(d) {
 
 })();
 
-//x();
 
 
-/*
-function arrangeLabels() {
-  var move = 1;
-  while(move > 0) {
-    move = 0;
-    svg.selectAll(".place-label")
-       .each(function() {
-         var that = this,
-             a = this.getBoundingClientRect();
-         svg.selectAll(".place-label")
-            .each(function() {
-              if(this != that) {
-                var b = this.getBoundingClientRect();
-                if((Math.abs(a.left - b.left) * 2 < (a.width + b.width)) &&
-                   (Math.abs(a.top - b.top) * 2 < (a.height + b.height))) {
-                  // overlap, move labels
-                  var dx = (Math.max(0, a.right - b.left) +
-                           Math.min(0, a.left - b.right)) * 0.01,
-                      dy = (Math.max(0, a.bottom - b.top) +
-                           Math.min(0, a.top - b.bottom)) * 0.02,
-                      tt = d3.transform(d3.select(this).attr("transform")),
-                      to = d3.transform(d3.select(that).attr("transform"));
-                  move += Math.abs(dx) + Math.abs(dy);
-                
-                  to.translate = [ to.translate[0] + dx, to.translate[1] + dy ];
-                  tt.translate = [ tt.translate[0] - dx, tt.translate[1] - dy ];
-                  d3.select(this).attr("transform", "translate(" + tt.translate + ")");
-                  d3.select(that).attr("transform", "translate(" + to.translate + ")");
-                  a = this.getBoundingClientRect();
-                }
-              }
-            });
-       });
-  }
-}
-*/
