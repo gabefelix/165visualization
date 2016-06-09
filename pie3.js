@@ -1,7 +1,8 @@
-(function() {var width = 360,
-    height = 400,
+(function() {var width = 420,
+    height = 420,
     // find the min of width and height and devided by 2
-    radius = Math.min(width, height) / 2;
+    radius = (Math.min(width, height) / 2.2 ) -20; 
+
 
 var color = d3.scale.ordinal()
     .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","#d0743c", "#ff8c00"]); 
@@ -10,6 +11,10 @@ var color = d3.scale.ordinal()
 var arc = d3.svg.arc()
     .outerRadius(radius - 10)
     .innerRadius(0);
+             
+var labelArc = d3.svg.arc()
+    .outerRadius(radius)
+    .innerRadius(radius );
 
 // Constructs a new pie function
 var pie = d3.layout.pie()
@@ -43,10 +48,12 @@ d3.csv("pie2.csv", function(error, data) {
 
   // add text
   g.append("text")
-      .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-      .attr("dy", ".35em")
-      .style("text-anchor", "middle")
-      .text(function(d) { return d.data.branch2; });
+      .attr("transform", function(d) { 
+      return "translate(" + labelArc.centroid(d) + ")"; })
+      //.attr("dy", ".35em")
+        .style("text-anchor", "middle")
+
+      .text(function(d) { return d.data.branch2 + "   " + (d.data.smallx/ 773463).toFixed(2) + "%" ; });
     
     // d3.selectAll("input")
       //.on("change", change);

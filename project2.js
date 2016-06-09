@@ -109,8 +109,8 @@ data.forEach(function(d) {
                .style("opacity", .9);
         }).on("mousemove", function(d) {
           tooltip .html(d["name"] + "<br> <div style=\"display: inline-block; text-align: left;\">" + "1985: " + d["values"][0].y + "%" + "<br>" + "2000: " + d["values"][14].y + "%" + "<br>" + "2015: " + d["values"][29].y + "%" + "</div>")
-               .style("left", ((d3.mouse(this))[0]) + "px")
-               .style("top", ((d3.mouse(this))[1]) + "px");
+               .style("left", ((d3.mouse(this))[0] + 50) + "px")
+               .style("top", ((d3.mouse(this))[1] + 150) + "px");
         })
         .on("mouseout", function(d) {
           tooltip.transition()
@@ -162,9 +162,9 @@ data.forEach(function(d) {
     .style("stroke", "rgb(240,40,0)");
     
      var myLine = browser.append("svg:line")
-    .attr("x1", 197)
+    .attr("x1", 198)
     .attr("y1", 0)
-    .attr("x2", 197)
+    .attr("x2", 198)
     .attr("y2", 450)
     .style("stroke", "rgb(240,40,0)");
 
@@ -190,9 +190,9 @@ data.forEach(function(d) {
     .style("stroke", "rgb(0,40,240)");
     
     var myLine = browser.append("svg:line")
-    .attr("x1", 453)
+    .attr("x1", 452)
     .attr("y1", 0)
-    .attr("x2", 453)
+    .attr("x2", 452)
     .attr("y2", 450)
     .style("stroke", "rgb(240,40,0)");
 
@@ -204,9 +204,9 @@ data.forEach(function(d) {
     .style("stroke", "rgb(240,40,0)");
 
     var myLine = browser.append("svg:line")
-    .attr("x1", 653)
+    .attr("x1", 655)
     .attr("y1", 0)
-    .attr("x2", 653)
+    .attr("x2", 654)
     .attr("y2", 450)
     .style("stroke", "rgb(240,40,0)");
 
