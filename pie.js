@@ -51,7 +51,7 @@ d3.csv("pie2.csv", function(error, data) {
         return "translate(" + labelArc.centroid(d) + ")"; })
       //.attr("dy", ".35em")
       .style("text-anchor", "middle")
-      .text(function(d) { return d.data.branch2 + "       " + (d.data.smallx/ 3287264).toFixed(2) + "%"; });
+      .text(function(d) { return d.data.branch2 + "  " + (d.data.smallx/ 3287264).toFixed(2) + "%"; });
     
     
     // d3.selectAll("input")

@@ -1,7 +1,7 @@
 (function() {var width = 420,
     height = 420,
     // find the min of width and height and devided by 2
-    radius = (Math.min(width, height) / 2.2 ) -20; 
+    radius = (Math.min(width, height) / 2.2 ) -40; 
 
 
 var color = d3.scale.ordinal()
@@ -53,7 +53,7 @@ d3.csv("pie2.csv", function(error, data) {
       //.attr("dy", ".35em")
         .style("text-anchor", "middle")
 
-      .text(function(d) { return d.data.branch2 + "   " + (d.data.smallx/ 773463).toFixed(2) + "%" ; });
+      .text(function(d) { return d.data.branch2 + "   " + (d.data.smallf/ 773463).toFixed(2) + "%" ; });
     
     // d3.selectAll("input")
       //.on("change", change);
