@@ -53,7 +53,7 @@ d3.csv("pie2.csv", function(error, data) {
       //.attr("dy", ".35em")
         .style("text-anchor", "middle")
 
-      .text(function(d) { return d.data.branch2 + "   " + (d.data.smallf/ 773463).toFixed(2) + "%" ; });
+      .text(function(d) { return d.data.branch2 + "    " + (d.data.smallf/ 773463*100).toFixed(4) + "%" ; });
     
     // d3.selectAll("input")
       //.on("change", change);
