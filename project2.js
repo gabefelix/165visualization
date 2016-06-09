@@ -108,7 +108,7 @@ data.forEach(function(d) {
                .duration(200)
                .style("opacity", .9);
         }).on("mousemove", function(d) {
-          tooltip .html(d["name"] + "<br> <div style=\"display: inline-block; text-align: left;\">" + "1985: " + d["values"][0].y + "%" + "<br>" + "2000: " + d["values"][14].y + "%" + "<br>" + "2015: " + d["values"][29].y + "%" + "</div>")
+          tooltip .html(d["name"] + "<br> <div style=\"display: inline-block; text-align: left;\">" + "1985: " + d["values"][0].y.toFixed(3) + "%" + "<br>" + "2000: " + d["values"][14].y.toFixed(3) + "%" + "<br>" + "2015: " + d["values"][29].y.toFixed(3) + "%" + "</div>")
                .style("left", ((d3.mouse(this))[0] + 50) + "px")
                .style("top", ((d3.mouse(this))[1] + 150) + "px");
         })
@@ -281,6 +281,7 @@ data.forEach(function(d) {
            
         //this.browser.exit().remove();
     // Get the data again
+        
     d3.csv("deptsmall.csv", function(error, data) {
         color.domain(d3.keys(data[0]).filter(function(key) { return     key !== "date"; }));
             data.forEach(function(d) {
@@ -311,8 +312,15 @@ data.forEach(function(d) {
 
        // var svg = d3.select("body").transition();
         
-       // browser.exit().transition.remove();
-        browser.data(browsers).select("path").transition().duration(550).attr("d", function(d) { return area(d.values); });
+       // var = 
+            
+        //browser.exit().transition(); 
+    //   d3.selectAll("path") 
+        browser.data(browsers).select("path").transition(40).duration(550).attr("d", function(d) { return area(d.values); });
+        
+        browser.data(browsers).select("text").transition(40).duration(550).attr("d", function(d) { return area(d.values); });
+        
+        
 
         //this line is supposed to remove the previous chart data
         /*browser.exit()
@@ -371,7 +379,7 @@ data.forEach(function(d) {
 
        // var svg = d3.select("body").transition();
         
-       // browser.exit().transition.remove();
+       // browser.exit().transition().remove();
         browser.data(browsers).select("path").transition().duration(550).attr("d", function(d) { return area(d.values); });
 
         //this line is supposed to remove the previous chart data
