@@ -1,7 +1,7 @@
 (function() {var width = 420,
     height = 420,
     // find the min of width and height and devided by 2
-    radius = (Math.min(width, height) / 2.2 ) -20; 
+    radius = (Math.min(width, height) / 2.2 ) -40; 
 
 var color = d3.scale.ordinal()
     .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00","#d0743c", "#ff8c00"]); 
@@ -51,7 +51,7 @@ d3.csv("pie2.csv", function(error, data) {
         return "translate(" + labelArc.centroid(d) + ")"; })
       //.attr("dy", ".35em")
       .style("text-anchor", "middle")
-      .text(function(d) { return d.data.branch2 + "  " + (d.data.smallx/ 3287264).toFixed(2) + "%"; });
+      .text(function(d) { return d.data.branch2 +  "  " + ((d.data.smallx/ 3287264 )*100).toFixed(3) + " %" ; });
     
     
     // d3.selectAll("input")
